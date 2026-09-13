@@ -816,3 +816,17 @@ footer.site{background:var(--cream);color:#141317;margin-top:90px;}
 .back{max-width:680px;margin:60px auto 0;}
 
 .back a{color:var(--purple-lt);font-size:14px;}
+/* ===== 공통 헤더 — 홈·강사소개·원데이·정규강의 페이지와 동일한 모양 ===== */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:250;height:42px;display:flex;
+  align-items:center;justify-content:center;gap:8px;background:var(--purple);color:#fff;
+  font-size:13.5px;font-weight:500;letter-spacing:-.01em;padding:0 16px;white-space:nowrap;
+  text-align:center;transition:background .3s var(--ease);}
+.topbar:hover{background:#8b4ff5;}
+.topbar b{font-weight:700;}
+.topbar .arr{display:inline-block;transition:transform .3s var(--ease);}
+.topbar:hover .arr{transform:translateX(4px);}
+@media (max-width:600px){ .topbar{font-size:11.5px;gap:6px;} .topbar .tb-x{display:none;} }
+
+body{padding-top:106px;}
+body.menu-open{overflow:hidden;}
+header.site .brand img{height:24px;width:auto;}
