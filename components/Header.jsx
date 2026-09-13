@@ -1,11 +1,10 @@
 'use client';
 import { useState } from 'react';
 
-const SITE = 'https://noshooni.com';
 const MENU = [
-  { label: '강사 소개',     href: `${SITE}/about` },
-  { label: '원데이 클래스', href: `${SITE}/1day/` },
-  { label: '정규 강의',     href: `${SITE}/class/` },
+  { label: '강사 소개',     href: '/about' },
+  { label: '원데이 클래스', href: '/1day' },
+  { label: '정규 강의',     href: '/class' },
   { label: '블로그',        href: '/blog', current: true },
 ];
 
@@ -20,7 +19,7 @@ export default function Header() {
       </div>
       <nav className="nav">
         <div className="nav-in">
-          <a className="brand" href={SITE}>노슈니<i className="flag" /></a>
+          <a className="brand" href="/">노슈니<i className="flag" /></a>
           <div className="menu">
             {MENU.map((m) => (
               <a key={m.label} href={m.href} className={m.current ? 'on' : undefined}>{m.label}</a>

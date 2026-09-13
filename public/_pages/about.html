@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>강사 소개 — 오수인 (노슈니) · AI 강사</title>
+<meta name="description" content="누적 1,000명의 AI 수강생과 함께한 오수인(노슈니) 강사. 10년차 콘텐츠 마케터·PM, 8년차 강사. 신세계디에프·대한항공 C&D 등 100곳+ 기업 AI 교육." />
+<meta property="og:title" content="강사 소개 — 오수인 (노슈니) · AI 강사" />
+<meta property="og:description" content="비전공자가 상상만 하던 서비스와 콘텐츠를 직접 완성하게 돕는 AI 강사 오수인(노슈니)." />
+<meta property="og:type" content="profile" />
+<link rel="canonical" href="https://noshooni.com/about" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+:root{--bg:#0e0e10;--bg-2:#141317;--bg-3:#191820;--purple:#7c3aed;--purple-lt:#a78bfa;--purple-dp:#2a2140;
+--cream:#f0ecff;--text:#e9e6f2;--muted:#98929f;--faint:#6c6674;--line:rgba(240,236,255,.12);--line-2:rgba(240,236,255,.22);--ease:cubic-bezier(.16,1,.3,1);}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:"Inter","Pretendard","Noto Sans KR",sans-serif;letter-spacing:-.02em;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;} img{display:block;max-width:100%;}
+::selection{background:var(--purple);color:#fff;}
+.mono{font-family:"Inter",monospace;font-size:12px;text-transform:uppercase;letter-spacing:.14em;font-weight:500;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+.rv.in{opacity:1;transform:none;}
+/* topbar/header/overlay/footer */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:250;height:42px;display:flex;align-items:center;justify-content:center;gap:8px;background:var(--purple);color:#fff;font-size:13.5px;font-weight:500;padding:0 16px;white-space:nowrap;transition:background .3s var(--ease);}
+.topbar:hover{background:#8b4ff5;} .topbar b{font-weight:700;} .topbar .arr{display:inline-block;transition:transform .3s var(--ease);} .topbar:hover .arr{transform:translateX(4px);}
+@media (max-width:600px){.topbar{font-size:11.5px;gap:6px;}.topbar .tb-x{display:none;}}
+header.site{position:fixed;top:42px;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:20px 24px;transition:background .4s var(--ease),backdrop-filter .4s;}
+header.site.scrolled{background:rgba(14,14,16,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+header.site .brand img{height:24px;}
+.topnav{display:none;align-items:center;gap:24px;}
+.topnav a{font-size:14px;font-weight:500;color:var(--cream);transition:opacity .3s;} .topnav a:hover{opacity:.5;} .topnav a.active{color:var(--purple-lt);}
+.menu-toggle{display:flex;align-items:center;gap:10px;background:none;border:none;color:var(--cream);font-family:Inter,monospace;font-size:13px;text-transform:uppercase;letter-spacing:.12em;font-weight:500;cursor:pointer;}
+.menu-toggle .plus{font-size:22px;line-height:1;transition:transform .5s var(--ease);} body.menu-open{overflow:hidden;} body.menu-open .menu-toggle .plus{transform:rotate(135deg);}
+.overlay{position:fixed;inset:0;z-index:150;background:var(--bg);display:flex;flex-direction:column;justify-content:center;padding:0 24px;clip-path:inset(0 0 100% 0);transition:clip-path .7s var(--ease);pointer-events:none;}
+body.menu-open .overlay{clip-path:inset(0 0 0% 0);pointer-events:auto;}
+.overlay>a{font-weight:700;letter-spacing:-.04em;font-size:clamp(32px,8vw,64px);line-height:1.12;color:var(--cream);padding:4px 0;width:max-content;transition:color .3s,transform .5s var(--ease);}
+.overlay>a:hover{color:var(--purple-lt);transform:translateX(16px);} .overlay>a .idx{font-family:Inter,monospace;font-size:12px;letter-spacing:.1em;color:var(--purple-lt);vertical-align:super;margin-left:9px;}
+.overlay .ov-foot{position:absolute;bottom:32px;left:24px;right:24px;display:flex;justify-content:space-between;color:var(--faint);}
+@media (min-width:981px){.topnav{display:flex;}.menu-toggle{display:none;}}
+footer.site{background:var(--cream);color:#141317;margin-top:0;}
+footer.site .foot-top{max-width:1100px;margin:0 auto;padding:70px 24px 46px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;}
+footer.site .wm img{height:28px;} footer.site .biz{margin-top:20px;font-size:13px;line-height:1.9;color:#4a4652;} footer.site .biz span{color:#141317;font-weight:600;}
+footer.site .foot-col h4{font-family:Inter,monospace;font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:#8a8593;font-weight:600;margin-bottom:16px;}
+footer.site .foot-col a{display:block;font-size:16px;color:#141317;padding:5px 0;transition:color .3s,transform .3s;} footer.site .foot-col a:hover{color:var(--purple);transform:translateX(5px);}
+footer.site .foot-bar{max-width:1100px;margin:0 auto;padding:20px 24px 40px;border-top:1px solid rgba(20,19,26,.14);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+footer.site .foot-bar .mono{color:#6c6674;}
+@media (max-width:760px){footer.site .foot-top{grid-template-columns:1fr;gap:32px;}}
+/* ===== about ===== */
+section{padding:92px 0;} @media(max-width:760px){section{padding:60px 0;}}
+.eb{color:var(--purple-lt);margin-bottom:18px;}
+.hero{padding-top:150px;}
+.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:center;}
+.hero h1{font-size:clamp(38px,5.6vw,64px);font-weight:800;letter-spacing:-.045em;line-height:1.08;color:var(--cream);}
+.hero h1 .p{color:var(--purple-lt);}
+.hero .lede{color:var(--muted);font-size:clamp(16px,1.6vw,18px);line-height:1.8;margin-top:24px;max-width:520px;}
+.hero .who{margin-top:30px;display:flex;align-items:baseline;gap:12px;}
+.hero .who .nm{font-size:22px;font-weight:800;color:var(--cream);letter-spacing:-.03em;}
+.hero .who .role{color:var(--faint);font-size:14px;}
+.portrait{border-radius:8px;overflow:hidden;border:1px solid var(--line);}
+.portrait img{width:100%;height:100%;object-fit:cover;}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:34px;}.portrait{max-width:320px;}}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.stat{background:var(--bg-2);border:1px solid var(--line);border-radius:6px;padding:32px 24px;transition:border-color .4s var(--ease);}
+.stat:hover{border-color:var(--line-2);}
+.stat .n{font-size:clamp(30px,3.6vw,42px);font-weight:800;color:var(--purple-lt);letter-spacing:-.04em;line-height:1;}
+.stat .l{color:var(--muted);font-size:14px;margin-top:12px;}
+.stat-note{color:var(--faint);font-size:14px;margin-top:20px;}
+@media(max-width:760px){.stat-grid{grid-template-columns:repeat(2,1fr);}}
+.sec-head h2{font-size:clamp(26px,3.4vw,38px);font-weight:800;letter-spacing:-.04em;color:var(--cream);line-height:1.15;}
+.sec-head p{color:var(--muted);margin-top:16px;max-width:640px;line-height:1.8;}
+.career{margin-top:36px;border-top:1px solid var(--line);}
+.career .row{display:flex;gap:18px;align-items:baseline;padding:18px 0;border-bottom:1px solid var(--line);}
+.career .tag{font-family:Inter,monospace;font-size:12px;letter-spacing:.06em;color:var(--purple-lt);min-width:34px;}
+.career .txt{color:var(--text);font-size:17px;} .career .txt .sub{color:var(--faint);font-size:14px;margin-left:8px;}
+.intro-q{border-left:2px solid var(--purple);padding:6px 0 6px 26px;margin:0 0 24px;}
+.intro-q h3{font-size:22px;font-weight:700;color:var(--cream);letter-spacing:-.03em;}
+.intro p{color:var(--text);font-size:16.5px;line-height:1.9;margin:16px 0;font-weight:300;max-width:720px;}
+.intro p .hl{color:var(--purple-lt);}
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px;}
+.why .card{background:var(--bg-2);border:1px solid var(--line);border-radius:6px;padding:30px 26px;transition:border-color .4s var(--ease);}
+.why .card:hover{border-color:var(--line-2);}
+.why .ic{width:34px;height:34px;border-radius:50%;background:var(--purple-dp);color:var(--purple-lt);display:flex;align-items:center;justify-content:center;font-weight:800;font-family:Inter,monospace;font-size:14px;margin-bottom:18px;}
+.why h4{color:var(--cream);font-size:18px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;}
+.why p{color:var(--muted);font-size:15px;line-height:1.75;}
+@media(max-width:760px){.why{grid-template-columns:1fr;}}
+.pills{display:flex;flex-wrap:wrap;gap:9px;margin-top:30px;}
+.pill{border:1px solid var(--line-2);border-radius:999px;padding:8px 15px;font-size:14px;color:var(--text);}
+.pill.more{color:var(--faint);border-style:dashed;}
+.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:36px;}
+.gal .g{background:var(--bg-2);border:1px solid var(--line);border-radius:6px;overflow:hidden;}
+.gal .g .im{aspect-ratio:16/10;overflow:hidden;} .gal .g .im img{width:100%;height:100%;object-fit:cover;}
+.gal .g .cap{padding:14px 16px;color:var(--muted);font-size:13.5px;line-height:1.5;}
+@media(max-width:860px){.gal{grid-template-columns:repeat(2,1fr);}} @media(max-width:520px){.gal{grid-template-columns:1fr;}}
+.creators{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px;}
+.creators .c{background:var(--bg-2);border:1px solid var(--line);border-radius:6px;padding:18px 20px;}
+.creators .c .f{color:var(--purple-lt);font-weight:700;font-size:15px;} .creators .c .who{color:var(--muted);font-size:14px;margin-top:4px;}
+@media(max-width:760px){.creators{grid-template-columns:1fr;}}
+.cta{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.cta h2{font-size:clamp(30px,4.4vw,52px);font-weight:800;letter-spacing:-.045em;color:var(--cream);line-height:1.1;}
+.cta p{color:var(--muted);margin-top:18px;max-width:560px;line-height:1.8;}
+.cta-btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px;}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:2px;padding:15px 26px;font-size:15px;font-weight:600;transition:.3s var(--ease);}
+.btn.pri{background:var(--purple);color:#fff;} .btn.pri:hover{background:#8b4ff5;}
+.btn.gho{border:1px solid var(--line-2);color:var(--cream);} .btn.gho:hover{border-color:var(--purple-lt);color:var(--purple-lt);}
+
+.curri{margin-top:36px;border-top:1px solid var(--line);}
+.curri .cr{display:flex;gap:20px;align-items:flex-start;padding:22px 0;border-bottom:1px solid var(--line);}
+.curri .num{flex:none;width:32px;height:32px;border-radius:50%;background:var(--purple-dp);color:var(--purple-lt);display:flex;align-items:center;justify-content:center;font-family:Inter,monospace;font-weight:700;font-size:14px;margin-top:2px;}
+.curri .ct h4{color:var(--cream);font-size:18px;font-weight:700;letter-spacing:-.02em;margin-bottom:6px;}
+.curri .ct p{color:var(--muted);font-size:15px;line-height:1.7;}
+.reviews{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px;}
+.rev{background:var(--bg-2);border:1px solid var(--line);border-radius:6px;padding:26px;}
+.rev .stars{color:var(--purple-lt);letter-spacing:3px;font-size:13px;margin-bottom:14px;}
+.rev p{color:var(--text);font-size:15.5px;line-height:1.8;font-weight:300;}
+.rev .who{color:var(--faint);font-size:13.5px;margin-top:14px;}
+@media(max-width:760px){.reviews{grid-template-columns:1fr;}}
+</style>
+
+<meta property="og:image" content="https://noshooni.com/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://noshooni.com/about">
+<meta name="twitter:card" content="summary_large_image">
+<script defer src="/js/site.js"></script>
+</head>
+<body>
+<a class="topbar" href="https://www.instagram.com/no_shooni/" target="_blank" rel="noopener">관련 소식을 가장 빠르게<span class="tb-x"> 받는 곳 · 노슈니</span> 인스타그램 <b>@no_shooni</b> <span class="arr">→</span></a>
+
+<header class="site">
+  <a href="/" class="brand" aria-label="NOSHOONI"><img fetchpriority="high" decoding="async" width="427" height="89" src="/images/noshooni-5f95636263.webp" alt="NOSHOONI" /></a>
+  <nav class="topnav" aria-label="주요 메뉴">
+    <a href="/about" class="active">강사 소개</a>
+    <a href="https://shoocreamvillage.notion.site/1675e8593cb68236869b81175250da57?pvs=105" target="_blank" rel="noopener">알림 신청</a>
+    <a href="/1day">원데이 클래스</a>
+    <a href="/class">정규 강의</a>
+    <a href="/#products">기업 강의</a>
+    <a href="/blog">블로그</a>
+    <a href="https://shoocreamvillage.notion.site/aireview?v=3b85e8593cb680afabf7000c0745be0d&source=copy_link" target="_blank" rel="noopener">후기</a>
+    <a href="https://shoocreamvillage.notion.site/2325e8593cb68128b06eedc97a0aa64b?pvs=105" target="_blank" rel="noopener">문의</a>
+  </nav>
+  <button class="menu-toggle" aria-label="메뉴 열기">MENU<span class="plus">+</span></button>
+</header>
+
+<nav class="overlay" aria-label="주요 메뉴">
+  <a href="/about">강사 소개<span class="idx">01</span></a>
+  <a href="https://shoocreamvillage.notion.site/1675e8593cb68236869b81175250da57?pvs=105" target="_blank" rel="noopener">알림 신청<span class="idx">02</span></a>
+  <a href="/1day">원데이 클래스<span class="idx">03</span></a>
+  <a href="/class">정규 강의<span class="idx">04</span></a>
+  <a href="/#products">기업 강의<span class="idx">05</span></a>
+  <a href="/blog">블로그<span class="idx">06</span></a>
+  <a href="https://shoocreamvillage.notion.site/aireview?v=3b85e8593cb680afabf7000c0745be0d&source=copy_link" target="_blank" rel="noopener">후기<span class="idx">07</span></a>
+  <a href="https://shoocreamvillage.notion.site/2325e8593cb68128b06eedc97a0aa64b?pvs=105" target="_blank" rel="noopener">문의<span class="idx">08</span></a>
+  <div class="ov-foot"><span class="mono">NOSHOONI</span><span class="mono">Seoul · Sinsa</span></div>
+</nav>
+
+<section class="hero"><div class="wrap">
+  <div class="eb mono rv">Instructor · 강사 소개</div>
+  <div class="hero-grid">
+    <div class="rv">
+      <h1>AI, 제대로 쓰는 법.<br/><span class="p">제가 직접 알려드릴게요.</span></h1>
+      <p class="lede">초보자도 강의가 끝나면 바로 실무에 적용할 수 있게 알려드립니다. AI를 처음 배우는 비전공자가 상상만 하던 서비스와 콘텐츠를 직접 완성해갈 수 있도록, Claude · Claude Code · 콘텐츠 자동화를 소수정예 집중 과정으로 가르칩니다.</p>
+      <div class="who"><span class="nm">오수인 (노슈니)</span><span class="role">AI 강사 · 콘텐츠 마케터 · PM</span></div>
+    </div>
+    <div class="portrait rv"><img fetchpriority="high" decoding="async" width="520" height="779" src="/images/img-38f91eebbf.webp" alt="오수인(노슈니) 강사" /></div>
+  </div>
+</div></section>
+
+<section style="padding-top:0;"><div class="wrap">
+  <div class="stat-grid">
+    <div class="stat rv"><div class="n">1,000명+</div><div class="l">AI 강의 누적 수강생</div></div>
+    <div class="stat rv"><div class="n">8년차</div><div class="l">강사 경력</div></div>
+    <div class="stat rv"><div class="n">100곳+</div><div class="l">참여 중소기업</div></div>
+    <div class="stat rv"><div class="n">10년차</div><div class="l">콘텐츠 마케터 · PM</div></div>
+  </div>
+  <p class="stat-note rv">마케팅 · 브랜딩 · 노션 강의까지 더하면 전체 누적 수강생은 5,000명 이상입니다. 2023년 AI 강연·특강을 시작해 2025년부터 정규 AI 강의를 진행하고 있습니다.</p>
+</div></section>
+
+<section style="padding-top:0;"><div class="wrap">
+  <div class="sec-head rv"><div class="eb mono">Career</div><h2>이력</h2></div>
+  <div class="career rv">
+    <div class="row"><span class="tag">현</span><span class="txt">노션 크리에이터 & 글로벌 앰배서더<span class="sub">노션 템플릿북 저자</span></span></div>
+    <div class="row"><span class="tag">현</span><span class="txt">슈크림마을 대표<span class="sub">커뮤니티</span></span></div>
+    <div class="row"><span class="tag">현</span><span class="txt">셀피쉬클럽 AI팀 PM<span class="sub">AI 프로젝트</span></span></div>
+    <div class="row"><span class="tag">전</span><span class="txt">그로우앤베터 PM<span class="sub">교육 플랫폼</span></span></div>
+    <div class="row"><span class="tag">전</span><span class="txt">발라랩 PM<span class="sub">뷰티 플랫폼</span></span></div>
+    <div class="row"><span class="tag">전</span><span class="txt">클래스101 PM<span class="sub">교육 플랫폼</span></span></div>
+  </div>
+</div></section>
+
+<section class="intro" style="padding-top:0;"><div class="wrap">
+  <div class="intro-q rv"><h3>안녕하세요, AI 강사 오수인입니다.</h3></div>
+  <p class="rv">저는 클래스101, 그로우앤베터, 발라랩 같은 IT 기업에서 PM과 마케터로 일하며, 사람들이 실제로 쓰는 서비스와 플랫폼을 직접 만들어 왔습니다. 기획부터 마케팅까지 <span class="hl">현장에서 부딪히며 배운 실무자</span>예요.</p>
+  <p class="rv">이후 AI 커뮤니티 셀피쉬클럽의 AI 프로젝트 팀 PM으로 활동하며, AI를 실제 업무에 적용하는 프로젝트를 직접 이끌었습니다. 대표적으로 천하제일 스타트업 체육대회에서 오프라인에 고객 200명을 모으는 과정을, 참가 신청부터 결제까지 고객 여정 전체를 AI로 자동화했습니다.</p>
+  <p class="rv">그렇게 비전공자도 AI를 실무에 <span class="hl">써먹게 만드는 일</span>을 해왔습니다. 복잡한 것을 쉽게, 오늘 바로 써먹을 수 있게 가르치는 데 집중합니다.</p>
+</div></section>
+
+<section style="padding-top:0;"><div class="wrap">
+  <div class="sec-head rv"><div class="eb mono">Why</div><h2>왜 오수인 강사의 강의일까요?</h2>
+    <p>어려운 기술 용어가 아니라, 마케팅·기획 실무자의 눈높이에서 "이걸로 어떤 일을 더 빠르게 해낼 수 있는가"를 알려드립니다.</p></div>
+  <div class="why">
+    <div class="card rv"><div class="ic">1</div><h4>비전공자도 이해되는 전달력</h4><p>어려운 AI 용어를 일상 언어로 풀어 단계별로 알려드려요. "이해됐다"는 말이 나올 때까지가 기준입니다.</p></div>
+    <div class="card rv"><div class="ic">2</div><h4>현업에서 검증된 실무 중심</h4><p>이론이 아니라 실제 업무에서 직접 써온 AI 활용법을 가르쳐요. 배운 걸 강의가 끝나는 즉시 자기 일에 적용합니다.</p></div>
+    <div class="card rv"><div class="ic">3</div><h4>100% 실전형 · 내 손으로 만든 결과물</h4><p>설명만 듣고 끝나지 않아요. 수강이 끝나면 직접 만든 나만의 AI 서비스를 그대로 들고 나갑니다. "배웠다"가 아니라 "만들었다"로 끝납니다.</p></div>
+  </div>
+</div></section>
+
+<section style="padding-top:0;"><div class="wrap">
+  <div class="sec-head rv"><div class="eb mono">Curriculum</div><h2>강의 주제 & 커리큘럼</h2>
+    <p>생성형 AI를 처음 접하는 직장인도 끝까지 따라올 수 있게 '기초 → 실무 → 자동화' 순서로 설계했습니다. 과정이 끝나면 ChatGPT·Claude를 실제 업무에 적용하고, 반복되는 일을 자동화할 수 있습니다.</p></div>
+  <div class="curri rv">
+    <div class="cr"><span class="num">1</span><div class="ct"><h4>생성형 AI 이해와 첫걸음</h4><p>ChatGPT·Claude 등 생성형 AI의 작동 원리와, 내 업무 어디에 쓸 수 있는지를 이해합니다.</p></div></div>
+    <div class="cr"><span class="num">2</span><div class="ct"><h4>실무용 프롬프트 작성법</h4><p>원하는 결과를 정확히 얻는 프롬프트 구조를 배우고, 보고서·기획·이메일 작성에 바로 적용합니다.</p></div></div>
+    <div class="cr"><span class="num">3</span><div class="ct"><h4>직무별 생성형 AI 활용</h4><p>자료 조사, 문서 정리, 데이터 요약, 카피 작성 등 실제 직무 상황에 AI를 적용합니다.</p></div></div>
+    <div class="cr"><span class="num">4</span><div class="ct"><h4>AI 업무 자동화 입문</h4><p>매일 반복하는 업무를 AI로 자동화하는 개념과 대표 도구를 익힙니다.</p></div></div>
+    <div class="cr"><span class="num">5</span><div class="ct"><h4>자동화 워크플로우 직접 구축</h4><p>클로드 코드를 활용해 나만의 자동화 흐름을 직접 만들어 봅니다.</p></div></div>
+    <div class="cr"><span class="num">6</span><div class="ct"><h4>나만의 AI 업무 시스템 완성</h4><p>배운 내용을 종합해, 수강 직후 바로 쓸 수 있는 개인 맞춤 AI 업무 환경을 구축합니다.</p></div></div>
+  </div>
+</div></section>
+
+<section style="padding-top:0;"><div class="wrap">
+  <div class="sec-head rv"><div class="eb mono">Clients</div><h2>출강 · 협업 기업</h2>
+    <p>중소기업 대상 스마트워크 AI 교육을 1년간 약 20회 진행하며 100곳 이상이 참여했습니다. 함께한 기업 일부입니다.</p></div>
+  <div class="pills rv">
+    <span class="pill">신세계디에프</span><span class="pill">대한항공 C&amp;D</span><span class="pill">메가스터디아카데미</span><span class="pill">뤼튼</span><span class="pill">서울옥션</span><span class="pill">WWD KOREA</span><span class="pill">무하유</span><span class="pill">인피닉</span><span class="pill">동구밭</span><span class="pill">마플코퍼레이션</span><span class="pill">어썸엔터테인먼트</span><span class="pill">포스뱅크</span><span class="pill">안양고용노동부</span><span class="pill">구리고등학교</span><span class="pill">한국디비케이</span><span class="pill">레드브릭스</span><span class="pill">팀엘리시움</span><span class="pill">마케팅클라우드</span><span class="pill more">외 30여 곳</span>
+  </div>
+</div></section>
+
+<section style="padding-top:0;"><div class="wrap">
+  <div class="sec-head rv"><div class="eb mono">Speaking</div><h2>AI 행사 · 강의 이력</h2></div>
+  <div class="gal">
+    <div class="g rv"><div class="im"><img loading="lazy" decoding="async" width="720" height="405" src="/images/img-fc85f5f141.webp" alt="벤자민 강연"/></div><div class="cap">앤트로픽(클로드) 공동창업자 벤자민 한국 초청 강연 운영 스태프</div></div>
+    <div class="g rv"><div class="im"><img loading="lazy" decoding="async" width="720" height="357" src="/images/make-with-notion-6eace63d64.webp" alt="Make with Notion"/></div><div class="cap">노션 AI 공식 초청 연사 (Make with Notion)</div></div>
+    <div class="g rv"><div class="im"><img loading="lazy" decoding="async" width="720" height="540" src="/images/img-dcdb8f5e1d.webp" alt="뤼튼 연사"/></div><div class="cap">뤼튼 AI 공식 초청 연사</div></div>
+    <div class="g rv"><div class="im"><img loading="lazy" decoding="async" width="720" height="531" src="/images/img-0ef2c5c442.webp" alt="신세계디에프 교육"/></div><div class="cap">신세계디에프 직원 AI 교육</div></div>
+    <div class="g rv"><div class="im"><img loading="lazy" decoding="async" width="720" height="540" src="/images/img-1d931d9946.webp" alt="중소기업 강의"/></div><div class="cap">중소기업 AI 도입 강의 (SBA 서울경제진흥원)</div></div>
+    <div class="g rv"><div class="im"><img loading="lazy" decoding="async" width="520" height="632" src="/images/img-380d9a3ccc.webp" alt="노션 템플릿북"/></div><div class="cap">노션 템플릿북 저자 · 2025 코엑스 교육박람회 노션 AI 부스 기획·운영</div></div>
+  </div>
+</div></section>
+
+<section style="padding-top:0;"><div class="wrap">
+  <div class="sec-head rv"><div class="eb mono">Reviews</div><h2>실제 수강생 후기</h2></div>
+  <div class="reviews">
+    <div class="rev rv"><div class="stars">★★★★★</div><p>"챗GPT 쓰고 싶었는데 뭘 물어봐야 할지 몰랐어요. 수업 듣고 나서 이제는 매일 쓰고 있어요. 진짜 쉽게 알려줘서 신기했어요."</p><div class="who">김○○ 님 · 40대 · 직장인</div></div>
+    <div class="rev rv"><div class="stars">★★★★★</div><p>"인스타 계정 혼자 운영하면서 항상 콘텐츠가 막막했는데, AI로 분석하는 법 배우고 나서 방향이 잡혔어요. 이미 팔로워 늘었어요."</p><div class="who">이○○ 님 · 30대 · 크리에이터</div></div>
+    <div class="rev rv"><div class="stars">★★★★★</div><p>"기술 쪽은 진짜 아무것도 모르는데 따라갈 수 있을까 걱정했는데, 용어 하나도 안 쓰고 쉽게 알려줘요. 결과물 나오니까 뿌듯해요."</p><div class="who">박○○ 님 · 30대 · 워킹맘</div></div>
+    <div class="rev rv"><div class="stars">★★★★★</div><p>"소수 정예라서 좋았어요. 질문도 편하게 할 수 있고, 내 상황에 맞게 피드백 받을 수 있어서 강의 값 이상으로 얻어간 느낌이에요."</p><div class="who">최○○ 님 · 40대 · 자영업자</div></div>
+  </div>
+</div></section>
+
+<section class="cta"><div class="wrap">
+  <div class="eb mono rv">Contact</div>
+  <h2 class="rv">함께 만들어볼까요?</h2>
+  <p class="rv">기업 · 공공기관 · 대학 · 개인 강의 문의를 받고 있습니다. 클래스 일정도 아래에서 확인하세요.</p>
+  <div class="cta-btns rv">
+    <a class="btn pri" href="/1day">원데이 클래스 보기 →</a>
+    <a class="btn gho" href="/class">정규 강의</a>
+    <a class="btn gho" href="https://shoocreamvillage.notion.site/2325e8593cb68128b06eedc97a0aa64b?pvs=105" target="_blank" rel="noopener">문의하기 ↗</a>
+  </div>
+</div></section>
+
+<footer class="site">
+  <div class="foot-top">
+    <div class="foot-brand"><div class="wm"><img loading="lazy" decoding="async" width="427" height="89" src="/images/noshooni-2b68e1c9a8.webp" alt="NOSHOONI" /></div>
+      <div class="biz"><span>노슈니 (NOSHOONI)</span> · 대표 오수인<br/>비전공자를 위한 AI 교육 · 강의 · 컨설팅<br/>Seoul, Korea</div></div>
+    <div class="foot-col"><h4>Menu</h4><a href="/">홈</a><a href="/blog">블로그</a><a href="/1day">원데이 클래스</a></div>
+    <div class="foot-col"><h4>Contact</h4><a href="https://www.instagram.com/no_shooni/" target="_blank" rel="noopener">Instagram ↗</a><a href="https://shoocreamvillage.notion.site/2325e8593cb68128b06eedc97a0aa64b?pvs=105" target="_blank" rel="noopener">문의 ↗</a></div>
+  </div>
+  <div class="foot-bar"><span class="mono">© 2026 노슈니 (NOSHOONI). All rights reserved.</span><span class="mono">AI 강사 · 강의 · 컨설팅</span></div>
+</footer>
+<script>(function(){var h=document.querySelector("header.site");if(h){addEventListener("scroll",function(){h.classList.toggle("scrolled",window.scrollY>40);},{passive:true});}var mt=document.querySelector(".menu-toggle");if(mt){mt.addEventListener("click",function(){document.body.classList.toggle("menu-open");});}document.querySelectorAll(".overlay a").forEach(function(a){a.addEventListener("click",function(){document.body.classList.remove("menu-open");});});var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add("in");});},{threshold:.12});document.querySelectorAll(".rv").forEach(function(el){io.observe(el);});})();</script>
+</body>
+</html>

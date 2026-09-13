@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>노슈니 (NOSHOONI) — AI 교육</title>
+<meta name="description" content="노슈니(NOSHOONI) — 비전공자가 상상만 하던 서비스와 콘텐츠를 Claude·Claude Code·콘텐츠 자동화로 직접 완성하도록 돕는 AI 교육 브랜드. 강사 오수인." />
+<meta property="og:title" content="노슈니 — AI, 이제 직접" />
+<meta property="og:description" content="비전공자를 위한 오프라인 AI 교육. Claude · Claude Code · 콘텐츠 자동화를 소수정예로." />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+
+<style>
+  :root{
+    --bg:#0e0e10; --bg-2:#141317; --line:rgba(240,236,255,.12); --line-2:rgba(240,236,255,.22);
+    --purple:#7c3aed; --purple-lt:#a78bfa; --cream:#f0ecff; --text:#e9e6f2; --muted:#98929f; --faint:#6c6674;
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg); color:var(--text);
+    font-family:"Inter","Pretendard",sans-serif; font-weight:400;
+    letter-spacing:-.02em; line-height:1.5; -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{display:block;}
+  ::selection{background:var(--purple);color:#fff;}
+
+  .mono{font-family:"Inter",monospace;font-size:13px;text-transform:uppercase;letter-spacing:.14em;font-weight:500;}
+
+  /* custom cursor (fine pointer only) */
+  .cursor{position:fixed;top:0;left:0;width:32px;height:32px;border-radius:50%;
+    background:#fff;mix-blend-mode:difference;pointer-events:none;z-index:9999;
+    transform:translate(-50%,-50%) scale(1);transition:transform .35s var(--ease);will-change:transform;}
+  .cursor.big{transform:translate(-50%,-50%) scale(2.5);}
+  @media (hover:hover) and (pointer:fine){ body.cursor-on{cursor:none;} body.cursor-on a,body.cursor-on button{cursor:none;} }
+  @media (hover:none),(pointer:coarse){ .cursor{display:none;} }
+
+  /* header */
+  .topbar{position:fixed;top:0;left:0;right:0;z-index:250;height:42px;display:flex;
+    align-items:center;justify-content:center;gap:8px;background:var(--purple);color:#fff;
+    font-size:13.5px;font-weight:500;letter-spacing:-.01em;padding:0 16px;white-space:nowrap;
+    transition:background .3s var(--ease);}
+  .topbar:hover{background:#8b4ff5;}
+  .topbar b{font-weight:700;}
+  .topbar .arr{display:inline-block;transition:transform .3s var(--ease);}
+  .topbar:hover .arr{transform:translateX(4px);}
+  @media (max-width:600px){ .topbar{font-size:11.5px;gap:6px;} .topbar .tb-x{display:none;} }
+  header.site{position:fixed;top:42px;left:0;right:0;z-index:200;
+    display:flex;align-items:center;justify-content:space-between;padding:24px;}
+  header.site .brand{display:flex;align-items:center;gap:7px;}
+  header.site .brand img{height:22px;}
+  header.site .brand .edu{font-family:"Inter",sans-serif;font-weight:800;font-size:17px;letter-spacing:-.03em;color:var(--cream);}
+  .menu-toggle{display:flex;align-items:center;gap:10px;background:none;border:none;color:var(--cream);
+    font-family:"Inter",monospace;font-size:13px;text-transform:uppercase;letter-spacing:.12em;font-weight:500;}
+  .menu-toggle .plus{display:inline-block;font-size:22px;line-height:1;transition:transform .5s var(--ease);}
+  body.menu-open .menu-toggle .plus{transform:rotate(135deg);}
+
+  /* overlay menu */
+  .topnav{display:none;align-items:center;gap:30px;}
+  .topnav a{font-size:14px;font-weight:500;color:var(--cream);letter-spacing:-.01em;transition:opacity .3s var(--ease);}
+  .topnav a:hover{opacity:.5;}
+  header.site{transition:background .4s var(--ease),backdrop-filter .4s var(--ease);}
+  header.site.scrolled{background:rgba(14,14,16,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+  @media (min-width:981px){ .topnav{display:flex;} .menu-toggle{display:none;} }
+/* 외부 사이트로 나가는 메뉴는 화살표로 예고 */
+.topnav a[target="_blank"]::after{content:"\2197";font-size:.75em;margin-left:3px;opacity:.45;vertical-align:top;}
+.overlay a[target="_blank"] .idx::after{content:" \2197";}
+
+  .overlay{position:fixed;inset:0;z-index:150;background:var(--bg);
+    display:flex;flex-direction:column;justify-content:center;padding:0 24px;
+    clip-path:inset(0 0 100% 0);transition:clip-path .7s var(--ease);pointer-events:none;}
+  body.menu-open .overlay{clip-path:inset(0 0 0% 0);pointer-events:auto;}
+  .overlay a{font-family:"Inter","Pretendard",sans-serif;font-weight:700;letter-spacing:-.04em;
+    font-size:clamp(38px,9vw,88px);line-height:1.06;color:var(--cream);padding:6px 0;width:max-content;
+    transition:color .3s var(--ease),transform .5s var(--ease);}
+  .overlay a:hover{color:var(--purple-lt);transform:translateX(18px);}
+  .overlay a .idx{font-family:"Inter",monospace;font-size:13px;letter-spacing:.1em;color:var(--purple-lt);
+    vertical-align:super;margin-left:10px;font-weight:500;}
+  .overlay .ov-foot{position:absolute;bottom:32px;left:24px;right:24px;display:flex;
+    justify-content:space-between;flex-wrap:wrap;gap:12px;color:var(--faint);}
+
+  /* hero */
+  .hero{min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:150px 24px 60px;}
+  .hero .eyebrow{color:var(--purple-lt);margin-bottom:28px;overflow:hidden;}
+  .hero .eyebrow span{display:inline-block;transform:translateY(120%);transition:transform 1s var(--ease) .1s;}
+  .hero.in .eyebrow span{transform:translateY(0);}
+  .hero-title{font-family:"Inter","Pretendard",sans-serif;font-weight:800;
+    font-size:clamp(56px,12vw,168px);line-height:.92;letter-spacing:-.05em;color:var(--cream);}
+  .hero-title .line{display:block;overflow:hidden;padding-bottom:.04em;}
+  .hero-title .ch{display:inline-block;transform:translateY(105%);transition:transform 1s var(--ease);will-change:transform;}
+  .hero-title .ch.sp{width:.28em;}
+  .hero-title .accent{color:var(--purple-lt);}
+  .hero .sub{font-size:clamp(17px,2.2vw,24px);color:var(--muted);margin-top:32px;font-weight:400;
+    opacity:0;transform:translateY(16px);transition:opacity 1s var(--ease) .7s,transform 1s var(--ease) .7s;}
+  .hero.in .sub{opacity:1;transform:translateY(0);}
+  .hero .scroll-hint{margin-top:56px;color:var(--faint);opacity:0;transition:opacity 1s ease 1.2s;}
+  .hero.in .scroll-hint{opacity:1;}
+
+  /* marquee */
+  .marquee{overflow:hidden;padding:10px 0 40px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);}
+  .marquee-track{display:flex;gap:22px;width:max-content;animation:scroll 42s linear infinite;}
+  .marquee:hover .marquee-track{animation-play-state:paused;}
+  @keyframes scroll{to{transform:translateX(-50%);}}
+  .m-card{position:relative;width:clamp(190px,22vw,270px);aspect-ratio:5/7;overflow:hidden;flex:none;
+    background:var(--bg-2);}
+  .m-card img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease);}
+  .m-card:hover img{transform:scale(1.05);}
+  .r-a{border-radius:100px 100px 8px 8px;}
+  .r-b{border-radius:100px 40px 40px 40px;}
+  .r-c{border-radius:40px;}
+  .r-d{border-radius:8px 100px 8px 100px;}
+
+  /* intro statement */
+  .intro{max-width:1100px;margin:0 auto;padding:90px 24px 100px;}
+  .intro .k{font-size:clamp(26px,4.4vw,58px);font-weight:600;line-height:1.28;letter-spacing:-.035em;color:var(--cream);}
+  .intro .k .g{color:var(--faint);}
+  .intro .k .p{color:var(--purple-lt);}
+  .intro .meta{margin-top:40px;display:flex;gap:28px;flex-wrap:wrap;color:var(--faint);}
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .9s var(--ease),transform .9s var(--ease);}
+  .reveal.visible{opacity:1;transform:none;}
+
+  /* project grid */
+  .work{max-width:1280px;margin:0 auto;padding:20px 24px 80px;}
+  .work-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:44px;flex-wrap:wrap;gap:12px;}
+  .work-head h2{font-size:clamp(30px,5vw,64px);font-weight:800;letter-spacing:-.05em;line-height:.95;color:var(--cream);}
+  .work-head .count{color:var(--purple-lt);}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:56px 40px;}
+  .item{cursor:pointer;}
+  .item .frame{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--bg-2);border-radius:6px;}
+  .item .frame img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease);}
+  .item .frame.contain{background:#0e0e10;}
+  .item .frame.contain img{object-fit:contain;}
+  .item:hover .frame img{transform:scale(1.05);}
+  .item .ovl{position:absolute;inset:0;background:rgba(14,14,16,.28);opacity:0;transition:opacity .5s var(--ease);}
+  .item:hover .ovl{opacity:1;}
+  .item .arrow{position:absolute;top:16px;right:16px;width:46px;height:46px;border-radius:50%;
+    background:var(--cream);color:#0e0e10;display:flex;align-items:center;justify-content:center;
+    opacity:0;transform:translate(6px,-6px) scale(.8);transition:all .5s var(--ease);}
+  .item:hover .arrow{opacity:1;transform:translate(0,0) scale(1);}
+  .item .arrow svg{width:20px;height:20px;}
+  .item .info{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;
+    border-top:1px solid var(--line);padding-top:16px;margin-top:18px;}
+  .item .info .t{font-size:clamp(17px,1.7vw,22px);font-weight:600;letter-spacing:-.03em;color:var(--cream);line-height:1.25;}
+  .item .info .cat{color:var(--muted);margin-top:6px;}
+  .item .info .yr{color:var(--faint);white-space:nowrap;}
+
+  /* products & services */
+  .products{max-width:1280px;margin:0 auto;padding:40px 24px 40px;}
+  .sec-head{margin-bottom:44px;}
+  .sec-head .eb{color:var(--purple-lt);margin-bottom:16px;}
+  .sec-head h2{font-size:clamp(30px,5vw,64px);font-weight:800;letter-spacing:-.05em;line-height:.95;color:var(--cream);}
+  .sec-head .note{margin-top:18px;font-size:15px;line-height:1.7;color:var(--muted);}
+  .prod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+  .prod{display:block;position:relative;background:var(--bg-2);border:1px solid var(--line);border-radius:16px;padding:34px 32px;}
+  .prod .ic{font-size:26px;display:block;margin-bottom:22px;}
+  .prod h3{font-size:clamp(18px,1.9vw,22px);font-weight:600;letter-spacing:-.03em;color:var(--cream);margin-bottom:12px;}
+  .prod p{font-size:15px;line-height:1.7;color:var(--muted);font-weight:400;}
+
+  /* kakao channel notice */
+  .channel-note{max-width:1120px;margin:60px auto 20px;padding:0 24px;}
+  .cn-box{border:1px solid var(--line);border-radius:24px;padding:64px 40px 56px;text-align:center;
+    background:radial-gradient(120% 120% at 50% 0,rgba(124,58,237,.1),transparent 60%);}
+  .cn-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(124,58,237,.16);
+    border:1px solid var(--line-2);color:var(--purple-lt);font-size:14px;font-weight:500;
+    padding:8px 18px;border-radius:999px;margin-bottom:30px;}
+  .cn-box h3{font-size:clamp(24px,4vw,44px);font-weight:700;letter-spacing:-.04em;line-height:1.4;color:var(--cream);}
+  .cn-box h3 b{color:var(--purple-lt);font-weight:800;}
+  .cn-box .cn-sub{color:var(--muted);font-size:clamp(15px,1.7vw,18px);margin-top:22px;line-height:1.85;}
+  .cn-btns{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:44px;}
+  .cn-btns a{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:16px;
+    padding:15px 30px;border-radius:999px;letter-spacing:-.02em;transition:transform .4s var(--ease),background .3s var(--ease),border-color .3s var(--ease);}
+  .cn-btns .primary{background:var(--purple);color:#fff;box-shadow:0 8px 30px rgba(124,58,237,.35);}
+  .cn-btns .primary:hover{background:#8b4ff5;transform:translateY(-3px);}
+  .cn-btns .ghost{background:var(--bg-2);color:var(--cream);border:1px solid var(--line-2);}
+  .cn-btns .ghost:hover{border-color:var(--purple-lt);transform:translateY(-3px);}
+  .cn-note{text-align:center;color:var(--faint);font-size:13px;margin-top:22px;}
+
+  @media (max-width:680px){
+    .prod-grid{grid-template-columns:1fr;}
+    .prod{padding:28px 24px;}
+    .cn-box{padding:48px 24px 44px;}
+  }
+
+  /* footer (high-contrast light) */
+  footer.site{background:var(--cream);color:#141317;margin-top:60px;}
+  .foot-top{max-width:1280px;margin:0 auto;padding:80px 24px 56px;
+    display:grid;grid-template-columns:1.4fr 1.6fr 1fr 1fr;gap:40px;}
+  .foot-brand .wm{font-family:"Inter",sans-serif;font-weight:800;font-size:26px;letter-spacing:-.04em;color:#141317;}
+  .foot-brand .wm b{color:var(--purple);}
+  .foot-brand .biz{margin-top:22px;font-size:13px;line-height:1.9;color:#4a4652;}
+  .foot-brand .biz span{color:#141317;font-weight:600;}
+  .foot-col h4{font-family:"Inter",monospace;font-size:12px;text-transform:uppercase;letter-spacing:.12em;
+    color:#8a8593;font-weight:600;margin-bottom:18px;}
+  .foot-col p{font-size:15px;line-height:1.7;color:#3b3742;}
+  .foot-col a{display:block;font-size:16px;color:#141317;padding:5px 0;transition:color .3s var(--ease),transform .3s var(--ease);}
+  .foot-col a:hover{color:var(--purple);transform:translateX(5px);}
+  .foot-bar{max-width:1280px;margin:0 auto;padding:22px 24px 40px;border-top:1px solid rgba(20,19,26,.14);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+  .foot-bar .mono{color:#6c6674;}
+  .cta-line{max-width:1280px;margin:0 auto;padding:0 24px;}
+  .cta-line a{display:block;padding:56px 0 44px;font-family:"Inter","Pretendard",sans-serif;font-weight:800;
+    letter-spacing:-.05em;line-height:.95;font-size:clamp(40px,8vw,120px);color:#141317;
+    transition:color .4s var(--ease);}
+  .cta-line a:hover{color:var(--purple);}
+  .cta-line a .ar{display:inline-block;transition:transform .5s var(--ease);}
+  .cta-line a:hover .ar{transform:translate(14px,-14px);}
+
+  @media (max-width:900px){
+    .foot-top{grid-template-columns:1fr 1fr;gap:40px 24px;}
+    .foot-brand{grid-column:1/-1;}
+  }
+  @media (max-width:680px){
+    .grid{grid-template-columns:1fr;gap:44px;}
+    .foot-top{grid-template-columns:1fr;}
+    header.site{padding:18px;}
+    .intro{padding:64px 22px 72px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;}
+    .hero-title .ch,.hero .eyebrow span{transform:none!important;}
+    .hero .sub{opacity:1!important;transform:none!important;}
+    .reveal{opacity:1!important;transform:none!important;}
+  }
+</style>
+
+<link rel="canonical" href="https://noshooni.com/">
+<meta property="og:image" content="https://noshooni.com/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://noshooni.com/">
+<meta name="twitter:card" content="summary_large_image">
+<script defer src="/js/site.js"></script>
+</head>
+<body>
+
+<a class="topbar" href="https://www.instagram.com/shooni_ai/" target="_blank" rel="noopener">관련 소식을 가장 빠르게<span class="tb-x"> 받는 곳 · 노슈니</span> 인스타그램 <b>@shooni_ai</b> <span class="arr">→</span></a>
+
+<div class="cursor" aria-hidden="true"></div>
+
+<header class="site">
+  <a href="#top" class="brand" aria-label="NOSHOONI"><img fetchpriority="high" decoding="async" width="427" height="89" src="/images/noshooni-5f95636263.webp" alt="NOSHOONI" style="height:24px" /></a>
+  <nav class="topnav" aria-label="주요 메뉴">
+    <a href="/about">강사 소개</a>
+    <a href="https://shoocreamvillage.notion.site/1675e8593cb68236869b81175250da57?pvs=105" target="_blank" rel="noopener">알림 신청</a>
+    <a href="/1day">원데이 클래스</a>
+    <a href="/class">정규 강의</a>
+    <a href="#products">강의·컨설팅</a>
+    <a href="/blog">블로그</a>
+    <a href="https://shoocreamvillage.notion.site/aireview?v=3b85e8593cb680afabf7000c0745be0d&source=copy_link" target="_blank" rel="noopener">후기</a>
+    <a href="https://shoocreamvillage.notion.site/2325e8593cb68128b06eedc97a0aa64b?pvs=105" target="_blank" rel="noopener">문의</a>
+  </nav>
+  <button class="menu-toggle" aria-label="메뉴 열기">MENU<span class="plus">+</span></button>
+</header>
+
+<nav class="overlay" aria-label="주요 메뉴">
+      <a href="/about">강사 소개<span class="idx">01</span></a>
+  <a href="https://shoocreamvillage.notion.site/1675e8593cb68236869b81175250da57?pvs=105" target="_blank" rel="noopener">알림 신청<span class="idx">02</span></a>
+  <a href="/1day">원데이 클래스<span class="idx">03</span></a>
+  <a href="/class">정규 강의<span class="idx">04</span></a>
+  <a href="#products">강의·컨설팅<span class="idx">05</span></a>
+  <a href="/blog">블로그<span class="idx">06</span></a>
+  <a href="https://shoocreamvillage.notion.site/aireview?v=3b85e8593cb680afabf7000c0745be0d&source=copy_link" target="_blank" rel="noopener">후기<span class="idx">07</span></a>
+  <a href="https://shoocreamvillage.notion.site/2325e8593cb68128b06eedc97a0aa64b?pvs=105" target="_blank" rel="noopener">문의<span class="idx">08</span></a>
+  <div class="ov-foot">
+    <span class="mono">NOSHOONI</span>
+    <span class="mono">Seoul · Sinsa</span>
+  </div>
+</nav>
+
+<div id="top"></div>
+
+<section class="hero" id="hero">
+  <div class="eyebrow mono"><span>NOSHOONI · AI EDUCATION</span></div>
+  <h1 class="hero-title">
+    <span class="line" data-text="AI, 이제"></span>
+    <span class="line accent" data-text="직접."></span>
+  </h1>
+  <p class="sub">Claude · Claude Code · 콘텐츠 자동화를 소수정예로</p>
+  <div class="scroll-hint mono">Scroll ↓</div>
+</section>
+
+<section class="marquee" aria-hidden="true">
+  <div class="marquee-track" id="track">
+    <div class="m-card r-a"><img fetchpriority="high" decoding="async" width="780" height="468" src="/images/img-6953aff34c.webp" style="object-position:68% 40%" alt="" /></div>
+    <div class="m-card r-c"><img loading="lazy" decoding="async" width="760" height="944" src="/images/img-af3162c7a2.webp" style="object-position:56% 30%" alt="" /></div>
+    <div class="m-card r-b"><img loading="lazy" decoding="async" width="920" height="517" src="/images/img-a991f5ad01.webp" style="object-position:50% 58%" alt="" /></div>
+    <div class="m-card r-d"><img loading="lazy" decoding="async" width="780" height="468" src="/images/img-e2b7965155.webp" style="object-position:32% 42%" alt="" /></div>
+    <div class="m-card r-c"><img loading="lazy" decoding="async" width="780" height="468" src="/images/img-40c83ef4fe.webp" style="object-position:42% 30%" alt="" /></div>
+    <div class="m-card r-a"><img loading="lazy" decoding="async" width="780" height="468" src="/images/img-f94e5ec5db.webp" style="object-position:50% 38%" alt="" /></div>
+    <div class="m-card r-b"><img loading="lazy" decoding="async" width="780" height="468" src="/images/img-646955da0f.webp" style="object-position:50% 30%" alt="" /></div>
+    <div class="m-card r-c"><img loading="lazy" decoding="async" width="760" height="780" src="/images/img-d067e3f770.webp" style="object-position:46% 34%" alt="" /></div>
+  </div>
+</section>
+
+<section class="intro">
+  <p class="k reveal">
+    <span class="p">노슈니</span>는 AI를 처음 배우는 비전공자가
+    <span class="g">머릿속으로 상상만 하던 서비스와 콘텐츠를 직접 완성해갈 수 있도록</span>
+    Claude · Claude Code · 콘텐츠 자동화를
+    <span class="p">소수정예 집중 과정</span>으로 가르치는 AI 교육 브랜드입니다.
+  </p>
+  <div class="meta reveal">
+    <span class="mono">Seoul · Sinsa-dong</span>
+    <span class="mono">Class · Content · Consulting</span>
+    <span class="mono">Est. 2024</span>
+  </div>
+</section>
+
+<section class="work" id="work">
+  <div class="work-head">
+    <h2 class="reveal">Selected<br/>Works</h2>
+    <span class="count mono reveal">12 Projects</span>
+  </div>
+  <div class="grid">
+
+    <a class="item reveal" href="https://shoocreamvillage.notion.site/focusaiedu?source=copy_link" target="_blank" rel="noopener">
+      <div class="frame"><img loading="lazy" decoding="async" width="900" height="506" src="/images/img-8f07592f21.webp" style="object-position:50% 42%" alt="앤트로픽(클로드) 공동창업자 벤자민 한국 초청 강연 운영 스탭진" />
+        <div class="ovl"></div>
+        <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></div>
+      </div>
+      <div class="info"><div><div class="t">앤트로픽(클로드) 공동창업자 벤자민 한국 초청 강연 운영 스탭진</div><div class="cat mono">Talk</div></div><div class="yr mono">2025</div></div>
+    </a>
+
+    <a class="item reveal" href="https://shoocreamvillage.notion.site/focusaiedu?source=copy_link" target="_blank" rel="noopener">
+      <div class="frame"><img loading="lazy" decoding="async" width="780" height="468" src="/images/img-f94e5ec5db.webp" style="object-position:50% 38%" alt="뤼튼 AI 초대 연사" />
+        <div class="ovl"></div>
+        <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></div>
+      </div>
+      <div class="info"><div><div class="t">뤼튼 AI 초대 연사</div><div class="cat mono">Talk</div></div><div class="yr mono">2025</div></div>
+    </a>
+
+    <a class="item reveal" href="https://shoocreamvillage.notion.site/focusaiedu?source=copy_link" target="_blank" rel="noopener">
+      <div class="frame"><img loading="lazy" decoding="async" width="860" height="645" src="/images/ai-99d11d4580.webp" style="object-position:50% 52%" alt="대기업 직원 AI 도입 워크샵" />
+        <div class="ovl"></div>
+        <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></div>
+      </div>
+      <div class="info"><div><div class="t">대기업 직원 AI 도입 워크샵</div><div class="cat mono">Workshop</div></div><div class="yr mono">2025</div></div>
+    </a>
+
+    <a class="item reveal" href="https://shoocreamvillage.notion.site/focusaiedu?source=copy_link" target="_blank" rel="noopener">
+      <div class="frame"><img loading="lazy" decoding="async" width="860" height="516" src="/images/ai-4252903f8e.webp" style="object-position:50% 45%" alt="중소기업 AI 도입 강의" />
+        <div class="ovl"></div>
+        <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></div>
+      </div>
+      <div class="info"><div><div class="t">중소기업 AI 도입 강의</div><div class="cat mono">Class</div></div><div class="yr mono">2025–26</div></div>
+    </a>
+
+    <a class="item reveal" href="https://shoocreamvillage.notion.site/focusaiedu?source=copy_link" target="_blank" rel="noopener">
+      <div class="frame"><img loading="lazy" decoding="async" width="860" height="516" src="/images/ai-457f7a3ae8.webp" style="object-position:52% 48%" alt="청년 대상 AI 강의" />
+        <div class="ovl"></div>
+        <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></div>
+      </div>
+      <div class="info"><div><div class="t">청년 대상 AI 강의</div><div class="cat mono">Class</div></div><div class="yr mono">2025</div></div>
+    </a>
+
+    <a class="item reveal" href="https://shoocreamvillage.notion.site/focusaiedu?source=copy_link" target="_blank" rel="noopener">
+      <div class="frame"><img loading="lazy" decoding="async" width="860" height="645" src="/images/ai-e87e6a8777.webp" style="object-position:50% 50%" alt="교육박람회 초청 AI 부스 운영" />
+        <div class="ovl"></div>
+        <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></div>
+      </div>
+      <div class="info"><div><div class="t">교육박람회 초청 AI 부스 운영</div><div class="cat mono">Project</div></div><div class="yr mono">2026</div></div>
+    </a>
+
+    <a class="item reveal" href="https://shoocreamvillage.notion.site/focusaiedu?source=copy_link" target="_blank" rel="noopener">
+      <div class="frame"><img loading="lazy" decoding="async" width="820" height="464" src="/images/play-with-notion-92c1d337db.webp" style="object-position:50% 42%" alt="노션 프로젝트 Play with Notion (어서노션 서바이벌)" />
+        <div class="ovl"></div>
+        <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></div>
+      </div>
+      <div class="info"><div><div class="t">노션 프로젝트 Play with Notion (어서노션 서바이벌)</div><div class="cat mono">Project</div></div><div class="yr mono">2025</div></div>
+    </a>
+
+    <a class="item reveal" href="https://shoocreamvillage.notion.site/focusaiedu?source=copy_link" target="_blank" rel="noopener">
+      <div class="frame"><img loading="lazy" decoding="async" width="920" height="517" src="/images/img-a991f5ad01.webp" style="object-position:50% 42%" alt="노슈니 정규 클래스" />
+        <div class="ovl"></div>
+        <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></div>
+      </div>
+      <div class="info"><div><div class="t">노슈니 정규 클래스</div><div class="cat mono">Class</div></div><div class="yr mono">2026</div></div>
+    </a>
+
+    <a class="item reveal" href="https://shoocreamvillage.notion.site/focusaiedu?source=copy_link" target="_blank" rel="noopener">
+      <div class="frame"><img loading="lazy" decoding="async" width="760" height="944" src="/images/img-af3162c7a2.webp" style="object-position:50% 20%" alt="노슈니 인스타 클래스" />
+        <div class="ovl"></div>
+        <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></div>
+      </div>
+      <div class="info"><div><div class="t">노슈니 인스타 클래스</div><div class="cat mono">Class</div></div><div class="yr mono">2026</div></div>
+    </a>
+
+    <a class="item reveal" href="https://shoocreamvillage.notion.site/focusaiedu?source=copy_link" target="_blank" rel="noopener">
+      <div class="frame"><img loading="lazy" decoding="async" width="760" height="780" src="/images/img-d067e3f770.webp" style="object-position:50% 30%" alt="노슈니 원데이 클래스" />
+        <div class="ovl"></div>
+        <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></div>
+      </div>
+      <div class="info"><div><div class="t">노슈니 원데이 클래스</div><div class="cat mono">Class</div></div><div class="yr mono">2026</div></div>
+    </a>
+
+    <a class="item reveal" href="https://shoocreamvillage.notion.site/focusaiedu?source=copy_link" target="_blank" rel="noopener">
+      <div class="frame contain"><img loading="lazy" decoding="async" width="640" height="640" src="/images/ai-pm-5a86033e39.webp" alt="셀피쉬클럽 AI 프로젝트 천스체 운영 PM" />
+        <div class="ovl"></div>
+        <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></div>
+      </div>
+      <div class="info"><div><div class="t">셀피쉬클럽 AI 프로젝트 천스체 운영 PM</div><div class="cat mono">Project</div></div><div class="yr mono">2023</div></div>
+    </a>
+
+    <a class="item reveal" href="https://shoocreamvillage.notion.site/focusaiedu?source=copy_link" target="_blank" rel="noopener">
+      <div class="frame"><img loading="lazy" decoding="async" width="900" height="475" src="/images/x-7af60aba36.webp" style="object-position:50% 40%" alt="뤼튼x셀피쉬클럽 에아이오락실 제주편 운영진" />
+        <div class="ovl"></div>
+        <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></div>
+      </div>
+      <div class="info"><div><div class="t">뤼튼x셀피쉬클럽 에아이오락실 제주편 운영진</div><div class="cat mono">Project</div></div><div class="yr mono">2023</div></div>
+    </a>
+
+  </div>
+</section>
+
+<section class="products" id="products">
+  <div class="sec-head">
+    <div class="eb mono reveal">Products &amp; Services</div>
+    <h2 class="reveal">판매 상품 · 서비스</h2>
+    <p class="note reveal">그동안 진행해 온 강의와 서비스입니다. 문의는 우측 상단 <b>문의</b>를 눌러 남겨주세요.</p>
+  </div>
+  <div class="prod-grid">
+    <div class="prod reveal"><span class="ic">🚀</span><h3>AI 원데이 클래스</h3><p>하루만에 AI로 내 사이트를 만들고 배포하는 시간</p></div>
+    <div class="prod reveal"><span class="ic">🎓</span><h3>AI 실무 강의</h3><p>Claude · Claude Code를 활용해 실제 업무와 사업에 바로 쓰는 오프라인 집중 강의</p></div>
+    <div class="prod reveal"><span class="ic">🎬</span><h3>AI 콘텐츠 제작 강의</h3><p>인스타그램 카드뉴스 · 콘텐츠 자동화 등 AI 기반 콘텐츠 제작 실습 과정</p></div>
+    <div class="prod reveal"><span class="ic">🧩</span><h3>노션 · AI 템플릿</h3><p>업무 생산성을 높이는 노션 템플릿과 AI 활용 템플릿 판매</p></div>
+    <div class="prod reveal"><span class="ic">📘</span><h3>전자책</h3><p>AI로 SNS 브랜딩하기 등 비전공자를 위한 실전 AI 활용 전자책</p></div>
+    <div class="prod reveal"><span class="ic">⚡</span><h3>AI 생산성 강의</h3><p>노션과 AI를 결합해 반복 업무를 자동화하는 생산성 향상 과정</p></div>
+    <div class="prod reveal"><span class="ic">🏢</span><h3>기업 컨설팅</h3><p>팀 단위 AI 도입과 업무 자동화를 설계하는 맞춤형 교육 컨설팅</p></div>
+    <div class="prod reveal"><span class="ic">💬</span><h3>개인 컨설팅</h3><p>1:1로 내 일에 맞는 AI 활용법과 콘텐츠 자동화를 잡아주는 컨설팅</p></div>
+  </div>
+</section>
+
+
+<footer class="site">
+  <div class="cta-line">
+    <a href="/1day">알림 신청하기 <span class="ar">↗</span></a>
+  </div>
+  <div class="foot-top">
+    <div class="foot-brand">
+      <div class="wm"><img loading="lazy" decoding="async" width="427" height="89" src="/images/noshooni-2b68e1c9a8.webp" alt="NOSHOONI" style="height:30px;display:block" /></div>
+      <div class="biz">
+        <span>노슈니 (NOSHOONI)</span> · 대표 오수인<br/>
+        비전공자를 위한 AI 교육 · 강의 · 컨설팅<br/>
+        Seoul, Korea
+      </div>
+    </div>
+    <div class="foot-col">
+      <h4>About</h4>
+      <p>비전공자가 상상만 하던 서비스와 콘텐츠를 직접 완성해가도록 돕는 AI 교육 브랜드 노슈니. Claude · Claude Code · 콘텐츠 자동화를 소수정예 집중 과정으로 가르칩니다.</p>
+    </div>
+    <div class="foot-col">
+      <h4>Social</h4>
+      <a href="https://www.instagram.com/focusai_edu" target="_blank" rel="noopener">Instagram ↗</a>
+      <a href="http://pf.kakao.com/_vCGPX" target="_blank" rel="noopener">KakaoTalk ↗</a>
+    </div>
+    <div class="foot-col">
+      <h4>Contact</h4>
+      <a href="/about">강사 소개 ↗</a>
+      <a href="https://shoocreamvillage.notion.site/2325e8593cb68128b06eedc97a0aa64b?pvs=105" target="_blank" rel="noopener">문의하기 ↗</a>
+    </div>
+  </div>
+  <div class="foot-bar">
+    <span class="mono">© 2026 노슈니 (NOSHOONI). All rights reserved.</span>
+    <span class="mono">AI 강사 · 강의 · 컨설팅</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var fine = window.matchMedia("(hover:hover) and (pointer:fine)").matches;
+
+  /* custom difference cursor */
+  if(fine){
+    document.body.classList.add("cursor-on");
+    var cur=document.querySelector(".cursor");
+    var mx=innerWidth/2,my=innerHeight/2,cx=mx,cy=my;
+    addEventListener("mousemove",function(e){mx=e.clientX;my=e.clientY;});
+    (function loop(){cx+=(mx-cx)*.18;cy+=(my-cy)*.18;
+      cur.style.left=cx+"px";cur.style.top=cy+"px";requestAnimationFrame(loop);})();
+    document.querySelectorAll("a,button,.item").forEach(function(el){
+      el.addEventListener("mouseenter",function(){cur.classList.add("big");});
+      el.addEventListener("mouseleave",function(){cur.classList.remove("big");});
+    });
+  }
+
+  /* menu toggle */
+  var mt=document.querySelector(".menu-toggle");
+  mt.addEventListener("click",function(){document.body.classList.toggle("menu-open");});
+  document.querySelectorAll(".overlay a").forEach(function(a){
+    a.addEventListener("click",function(){document.body.classList.remove("menu-open");});
+  });
+
+  /* hero staggered letter reveal */
+  var hero=document.getElementById("hero");
+  document.querySelectorAll(".hero-title .line").forEach(function(line,li){
+    var txt=line.getAttribute("data-text")||"";
+    var frag=document.createDocumentFragment();
+    txt.split("").forEach(function(chr,i){
+      var s=document.createElement("span");
+      s.className="ch"+(chr===" "?" sp":"");
+      s.textContent=chr===" "?"":chr;
+      s.style.transitionDelay=(li*0.12 + i*0.045)+"s";
+      frag.appendChild(s);
+    });
+    line.appendChild(frag);
+  });
+  requestAnimationFrame(function(){requestAnimationFrame(function(){
+    hero.classList.add("in");
+    hero.querySelectorAll(".hero-title .ch").forEach(function(c){c.style.transform="translateY(0)";});
+  });});
+
+  /* reveal on scroll */
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("visible");io.unobserve(e.target);}});
+  },{threshold:.14});
+  document.querySelectorAll(".reveal").forEach(function(el){io.observe(el);});
+
+  /* duplicate marquee for seamless loop */
+  var track=document.getElementById("track");
+  track.innerHTML+=track.innerHTML;
+})();
+</script>
+<script>(function(){var h=document.querySelector("header.site");addEventListener("scroll",function(){h.classList.toggle("scrolled",window.scrollY>40);},{passive:true});})();</script>
+</body>
+</html>
